@@ -14,16 +14,10 @@ int main()
     // shmat to attach to shared memory 
     char *str = (char*) shmat(shmid,(void*)0,0); 
 
-    char* plaintext;
     printf("Write Data : \n"); 
-    scanf("%s", plaintext);
+    scanf("%s", str);
     
-    char* encoded = encodeRot13String(plaintext);
-
-    for(int i = 0; i < stringLength(encoded); i++)
-    {
-        *(str + i) = *(encoded + i);
-    }
+    memcpy((void*)str, (void*)encodeRot13String(str), stringLength(str));
 
     printf("Data written in memory: %s\n",str); 
       
