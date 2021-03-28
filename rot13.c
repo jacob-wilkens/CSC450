@@ -1,15 +1,7 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-char encodeRot13(char c);
-int indexOf(char c, char* s);
-int stringLength(char* s);
-char* encodeRot13String(char* s);
+#include "rot13.h"
 
 char* encodeRot13String(char* s)
 {
-    
     int length = stringLength(s);
     char* answer = (char*)malloc(length * (int)sizeof(char) + 1);
     char temp;
@@ -20,7 +12,6 @@ char* encodeRot13String(char* s)
     }
     *(answer + length) = '\0';
     return answer;
-
 }
 
 int stringLength(char* s)
@@ -36,11 +27,16 @@ int stringLength(char* s)
 
 char encodeRot13(char c)
 {
+    if(c == ' ') {
+        return c;
+    }
+    
     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
     int index = indexOf(c, alphabet);
-    index = (index + 13)%26;
-    return *(alphabet + index);
 
+    index = (index + 13)%26;
+
+    return *(alphabet + index);
 }
 
 int indexOf(char c, char* s)
